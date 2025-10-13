@@ -5,7 +5,7 @@ function App() {
   const [file1, setFile1] = useState(null);
   const [file2, setFile2] = useState(null);
 
-  const handleSubmit = async (e: any) => {
+  const handleUpload = async (e: any) => {
     e.preventDefault();
     console.log(file1);
     console.log(file2);
@@ -19,35 +19,50 @@ function App() {
       formData.append("file2", file2);
     }
 
-    const res = await axios.put("https://smartsheets2-backend-production.up.railway.app/app/join/", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    console.log(res);
-    console.log(res.data);
+    try {
+      // const res = await axios.put("http://localhost:8000/app/join/", formData, {
+      //   headers: {
+      //     "Content-Type": "multipart/form-data",
+      //   },
+      // });
+      const res = await axios.put("https://smartsheets2-backend-production.up.railway.app/app/join/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
-    // Create a URL for the CSV blob
-    const url = window.URL.createObjectURL(new Blob([res.data]));
-    const link = document.createElement("a");
-    link.href = url;
-    link.setAttribute("download", "data.csv"); // filename
-    document.body.appendChild(link);
-    link.click();
-    link.remove(); // cleanup
+      console.log(res);
+      console.log(res.data);
+
+      if (res.data.status === "Failed") {
+        alert(`Error: ${res.data.message}`);
+      } else {
+        alert(`Success`);
+        // Create a URL for the CSV blob
+        const url = window.URL.createObjectURL(new Blob([res.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "data.csv"); // filename
+        document.body.appendChild(link);
+        link.click();
+        link.remove(); // cleanup
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <>
-      <h1>Join two csv files</h1>
-      <form onSubmit={handleSubmit}>
+      <h1>Clean and join two csv files</h1>
+      <form onSubmit={handleUpload}>
         <div>
           <input type="file" name="file1" id="file1" onChange={(e: any) => setFile1(e.target.files[0])} />
         </div>
         <div>
           <input type="file" name="file2" id="file2" onChange={(e: any) => setFile2(e.target.files[0])} />
         </div>
-        <button type="submit">Join!</button>
+        <button type="submit">Clean and Join</button>
       </form>
     </>
   );
