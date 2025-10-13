@@ -19,7 +19,7 @@ function App() {
       formData.append("file2", file2);
     }
 
-    const res = await axios.put("http://localhost:8000/app/join/", formData, {
+    const res = await axios.put("https://smartsheets2-backend-production.up.railway.app/app/join/", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
