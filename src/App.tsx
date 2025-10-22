@@ -1,5 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
+import { FileUploadButton } from "./FileUploadButton";
+import "./index.css";
+import SubmitButton from "./SubmitButton";
+import { Text } from "@/components/retroui/Text";
 
 function App() {
   const [file1, setFile1] = useState(null);
@@ -54,16 +58,16 @@ function App() {
 
   return (
     <>
-      <h1>Clean and join two csv files</h1>
-      <form onSubmit={handleUpload}>
-        <div>
-          <input type="file" name="file1" id="file1" onChange={(e: any) => setFile1(e.target.files[0])} />
-        </div>
-        <div>
-          <input type="file" name="file2" id="file2" onChange={(e: any) => setFile2(e.target.files[0])} />
-        </div>
-        <button type="submit">Clean and Join</button>
-      </form>
+      <div>
+        <Text as="h1">Clean and join two csv files</Text>
+        <form onSubmit={handleUpload}>
+          <div style={{ display: "flex", gap: "10px" }}>
+            <FileUploadButton fileNumber={1} onFileSelect={(e: any) => setFile1(e)} />
+            <FileUploadButton fileNumber={2} onFileSelect={(e: any) => setFile2(e)} />
+            <SubmitButton text="Clean and Join" />
+          </div>
+        </form>
+      </div>
     </>
   );
 }
