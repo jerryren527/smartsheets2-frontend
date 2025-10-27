@@ -9,12 +9,9 @@ import Grid from "./Grid";
 
 const CleanFile = () => {
   const [file1, setFile1] = useState<File | null>(null);
-  const [isUploaded, setIsUploaded] = useState<boolean>(false);
   const [df, setDf] = useState<any[] | null>(null);
   const [tmpFilepath, setTmpFilepath] = useState<string | null>(null);
-  const [isClean, setIsClean] = useState<boolean>(false);
   const navigate = useNavigate();
-  // const [file2, setFile2] = useState<File | null>(null);
 
   const handleUpload = async (e: any) => {
     e.preventDefault();
@@ -69,8 +66,6 @@ const CleanFile = () => {
       console.log(res);
       console.log(res.data);
       setDf(res.data.data);
-      setIsClean(true);
-      // navigate("/cleaned-file", { state: { id: 7, color: "green" } });
       navigate("/cleaned-file", { state: { cleanedDf: res.data.data } });
     } catch (error) {
       console.error(error);

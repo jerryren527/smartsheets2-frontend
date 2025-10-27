@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./index.css";
 import { Text } from "@/components/retroui/Text";
 import { Button } from "./components/retroui/Button";

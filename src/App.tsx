@@ -1,11 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import axios from "axios";
-import { FileUploadButton } from "./FileUploadButton";
 import "./index.css";
-import SubmitButton from "./SubmitButton";
-import { Text } from "@/components/retroui/Text";
-import GridExample from "./GridExample";
-import { Button } from "./components/retroui/Button";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import CleanFile from "./CleanFile";

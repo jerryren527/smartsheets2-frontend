@@ -1,4 +1,3 @@
-import React from "react";
 import { Text } from "@/components/retroui/Text";
 import { useLocation } from "react-router-dom";
 import Grid from "./Grid";

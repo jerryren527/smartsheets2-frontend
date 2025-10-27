@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { FileUploadButton } from "./FileUploadButton";
 import SubmitButton from "./SubmitButton";
@@ -27,7 +27,7 @@ const JoinFiles = () => {
       //     "Content-Type": "multipart/form-data",
       //   },
       // });
-      const res = await axios.put("https://smartsheets2-backend-production.up.railway.app/app/join/", formData, {
+      const res = await axios.put("https://smartsheets2-backend-production.up.railway.app/app/join", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
