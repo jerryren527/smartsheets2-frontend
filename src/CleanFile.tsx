@@ -54,7 +54,7 @@ const CleanFile = () => {
     }
   };
 
-  const handleClean = async (e: any) => {
+  const handleClean = async () => {
     try {
       const body = {
         tmpFilepath,
