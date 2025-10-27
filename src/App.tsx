@@ -7,6 +7,10 @@ import CleanFile from "./CleanFile";
 import JoinFiles from "./JoinFiles";
 import CleanedFile from "./CleanedFile";
 
+import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
+// Import this once, globally. Not in every ag-grid component.
+ModuleRegistry.registerModules([AllCommunityModule]);
+
 function App() {
   useEffect(() => {
     const deleteTmpFles = async () => {
