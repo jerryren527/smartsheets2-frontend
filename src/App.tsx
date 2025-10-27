@@ -11,13 +11,15 @@ import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 // Import this once, globally. Not in every ag-grid component.
 ModuleRegistry.registerModules([AllCommunityModule]);
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 function App() {
   useEffect(() => {
     const deleteTmpFles = async () => {
       console.log("Deleting all tmp files in /tmp...");
       try {
         // const res = await axios.delete("http://localhost:8000/app/delete-tmp-files");
-        const res = await axios.delete("https://smartsheets2-backend-production.up.railway.app/app/delete-tmp-files");
+        const res = await axios.delete(`${apiUrl}/app/delete-tmp-files`);
         console.log(res.data);
       } catch (error) {
         console.error(error);
@@ -25,6 +27,7 @@ function App() {
     };
 
     deleteTmpFles();
+    console.log("apiUrl", apiUrl);
   }, []);
   return (
     <>
