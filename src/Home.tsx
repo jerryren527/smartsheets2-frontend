@@ -1,4 +1,3 @@
-import "./index.css";
 import { Text } from "@/components/retroui/Text";
 import { Button } from "./components/retroui/Button";
 import { Link } from "react-router-dom";
@@ -18,11 +17,11 @@ function Home() {
           }}
         >
           <Text as="h1">Getting Started 👋</Text>
-          <Button size={"lg"} style={{ height: "200px", width: "275px" }} asChild>
-            <Link to="/clean-file">Clean a CSV/Excel File</Link>
+          <Button size={"lg"} style={{ height: "200px", width: "250px" }} asChild>
+            <Link to="/clean-file">Clean a CSV File</Link>
           </Button>
-          <Button size={"lg"} style={{ height: "200px", width: "275px" }} asChild>
-            <Link to="/join-files">Join two CSV/Excel File</Link>
+          <Button size={"lg"} style={{ height: "200px", width: "250px" }} asChild>
+            <Link to="/join-files">Join two CSV File</Link>
           </Button>
         </div>
       </div>

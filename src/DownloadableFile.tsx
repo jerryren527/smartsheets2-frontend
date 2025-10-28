@@ -4,13 +4,12 @@ import Grid from "./Grid";
 import ExportButton from "./ExportButton";
 import { Button } from "./components/retroui/Button";
 
-const CleanedFile = () => {
+const DownloadableFile = () => {
   const { state } = useLocation();
-  const { cleanedDf } = state;
-  console.log(cleanedDf);
-  // const navigate = useNavigate();
+  const { df } = state;
 
   const handleStartOver = () => {
+    // Want to refresh the page
     window.location.href = "/";
   };
   return (
@@ -26,11 +25,11 @@ const CleanedFile = () => {
     >
       <Text as={"h2"}>File Cleaned!</Text>
 
-      <Grid df={cleanedDf} />
-      <ExportButton data={cleanedDf} filename={"data.csv"} />
+      <Grid df={df} height="70vh" width="70vw" />
+      <ExportButton data={df} filename={"data.csv"} />
       <Button onClick={handleStartOver}>Start Over</Button>
     </div>
   );
 };
 
-export default CleanedFile;
+export default DownloadableFile;

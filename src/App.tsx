@@ -1,11 +1,10 @@
 import { useEffect } from "react";
 import axios from "axios";
-import "./index.css";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import CleanFile from "./CleanFile";
 import JoinFiles from "./JoinFiles";
-import CleanedFile from "./CleanedFile";
+import DownloadableFile from "./DownloadableFile";
 
 import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 // Import this once, globally. Not in every ag-grid component.
@@ -18,7 +17,6 @@ function App() {
     const deleteTmpFles = async () => {
       console.log("Deleting all tmp files in /tmp...");
       try {
-        // const res = await axios.delete("http://localhost:8000/app/delete-tmp-files");
         const res = await axios.delete(`${apiUrl}/app/delete-tmp-files`);
         console.log(res.data);
       } catch (error) {
@@ -34,7 +32,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/clean-file" element={<CleanFile />} />
-        <Route path="/cleaned-file" element={<CleanedFile />} />
+        <Route path="/downloadable-file" element={<DownloadableFile />} />
         <Route path="/join-files" element={<JoinFiles />} />
       </Routes>
     </>

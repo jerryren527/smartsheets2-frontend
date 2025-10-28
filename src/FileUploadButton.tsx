@@ -5,10 +5,14 @@ export function FileUploadButton({
   onFileSelect,
   fileNumber,
   data,
+  height,
+  width,
 }: {
   onFileSelect: (file: File) => void;
   fileNumber?: number;
   data: File | null;
+  height: number;
+  width: number;
 }) {
   return (
     <div>
@@ -26,7 +30,7 @@ export function FileUploadButton({
         {/* asChild prop will let the child (must only be one child) inherit the properties of the parent (all of the styling of shadcn Button component) */}
         <Button
           variant="outline"
-          style={{ height: "400px", width: "400px", display: "flex", justifyContent: "center", alignItems: "center" }}
+          style={{ height: height, width: width, display: "flex", justifyContent: "center", alignItems: "center" }}
           asChild
         >
           {data ? <span>{data.name}</span> : <span>Select File {fileNumber}</span>}

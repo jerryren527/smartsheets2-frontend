@@ -10,44 +10,31 @@ import Grid from "./Grid";
 const CleanFile = () => {
   const [file1, setFile1] = useState<File | null>(null);
   const [df, setDf] = useState<any[] | null>(null);
-  const [tmpFilepath, setTmpFilepath] = useState<string | null>(null);
+  const [tmpFilePath, setTmpFilePath] = useState<string | null>(null);
   const navigate = useNavigate();
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const handleUpload = async (e: any) => {
     e.preventDefault();
-    console.log("inside handleupload");
-    // console.log(file1);
-    // console.log(file2);
 
-    // // Send the files as multipart/form-data. This is how files are sent in request.FILES
+    // Send the files as multipart/form-data. This is how files are sent in request.FILES
     const formData = new FormData();
     if (file1) {
-      formData.append("file1", file1);
+      formData.append("file", file1);
     }
-    // if (file2) {
-    //   formData.append("file2", file2);
-    // }
 
     try {
-      const res = await axios.put("https://smartsheets2-backend-production.up.railway.app/app/upload-file", formData, {
+      const res = await axios.put(`${apiUrl}/app/upload-file`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      // const res = await axios.put("http://localhost:8000/app/upload-file", formData, {
-      //   headers: {
-      //     "Content-Type": "multipart/form-data",
-      //   },
-      // });
-
-      console.log(res);
-      console.log(res.data);
 
       if (res.data.status === "Failed") {
         alert(`Error: ${res.data.message}`);
       } else {
         setDf(res.data.data);
-        setTmpFilepath(res.data.filepath);
+        setTmpFilePath(res.data.filepath);
       }
     } catch (error) {
       console.error(error);
@@ -57,21 +44,14 @@ const CleanFile = () => {
   const handleClean = async () => {
     try {
       const body = {
-        tmpFilepath,
+        tmpFilePath,
       };
-      const filepath = file1?.name;
-      console.log("🚀 ~ handleClean ~ filepath:", filepath);
-      const res = await axios.put("https://smartsheets2-backend-production.up.railway.app/app/clean-file", body);
-      // const res = await axios.put("http://localhost:8000/app/clean-file", body);
-      console.log(res);
-      console.log(res.data);
+      const res = await axios.put(`${apiUrl}/app/clean-file`, body);
       setDf(res.data.data);
-      navigate("/cleaned-file", { state: { cleanedDf: res.data.data } });
+      navigate("/downloadable-file", { state: { df: res.data.data } });
     } catch (error) {
       console.error(error);
     }
-
-    console.log("handleClean");
   };
   return (
     <>
@@ -88,7 +68,7 @@ const CleanFile = () => {
             }}
           >
             <Text as={"h2"}>Previewing {file1?.name}</Text>
-            <Grid df={df} />
+            <Grid df={df} height="70vh" width="70vw" />
             <Button onClick={handleClean}>Clean</Button>
           </div>
         </>
@@ -104,8 +84,14 @@ const CleanFile = () => {
               alignItems: "center",
             }}
           >
-            <Text as={"h1"}>Upload CSV/Excel ⬆︎</Text>
-            <FileUploadButton fileNumber={1} onFileSelect={(e: any) => setFile1(e)} data={file1} />
+            <Text as={"h1"}>Upload CSV File ⬆︎</Text>
+            <FileUploadButton
+              fileNumber={1}
+              onFileSelect={(e: any) => setFile1(e)}
+              data={file1}
+              height={400}
+              width={400}
+            />
             <Button variant={"secondary"}>Upload</Button>
           </div>
         </form>
